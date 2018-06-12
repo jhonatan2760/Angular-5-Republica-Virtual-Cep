@@ -1,0 +1,38 @@
+<div class="container">
+  <h3>Busca cep</h3>
+  <form [formGroup]="form" >
+    <div class="form-group">
+      <input formControlName="cep" type="cep" class="form-control" id="exampleInputEmail1" placeholder="Digite o cep">
+      <small id="emailHelp" class="form-text text-muted">Digite um cep válido.</small>
+    </div>
+    <div *ngIf="error">
+      <div class="alert alert-info" role="alert">
+        {{error}}
+      </div>
+    </div>
+    <div *ngIf="done">
+      <div class="alert alert-success" role="alert">
+        {{done}}
+      </div>
+    </div>
+    <div class="form-group">
+      <input type="text" formControlName="tipo_logradouro" class="form-control" id="tipoLogradouro" placeholder="Tipo Logradouro" readonly>
+    </div>
+    <div class="form-group">
+      <input type="text" formControlName="logradouro" value="" class="form-control" id="logradouro" placeholder="Logradouro" readonly>
+    </div>
+    <div class="form-group">
+        <input type="text" formControlName="bairro" value="" class="form-control" id="bairro" placeholder="Bairro" readonly>
+      </div>
+    <div class="form-group">
+      <input type="text" formControlName="uf" class="form-control" id="uf" placeholder="UF" readonly>
+    </div>
+    <div class="form-group">
+        <input type="text" formControlName="cidade" class="form-control" id="estado" placeholder="Cidade" readonly>
+    </div>
+    <div *ngIf="done" >
+      <app-google-maps address="{{form.value.logradouro + form.value.cidade}}" ></app-google-maps>
+    </div>
+    <button [disabled]="!form.controls.cep.valid" (click)="buscarCep()" type="submit" class="btn btn-primary">Procurar</button>
+  </form>
+</div>
